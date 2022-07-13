@@ -59,7 +59,7 @@ const Item = styled("div")`
   }
 `;
 
-const Dropdown = ({ cluster }) => {
+const Dropdown = ({ cluster, changeCluster }) => {
   const [status, setStatus] = React.useState(false);
   const [currentCluster, setCurrentCluster] = React.useState();
   const handleStatus = (e) => {
@@ -72,12 +72,12 @@ const Dropdown = ({ cluster }) => {
   }, [cluster]);
 
   const handleClusterChange = (e) => {
-    setCurrentCluster(e.currentTarget.innerText);
+    changeCluster(e.currentTarget.innerText);
   };
   return (
     <>
       <DropdownContainer status={status} onClick={handleStatus}>
-        {[currentCluster, ...(cluster ?? "")]?.map((item, index) => {
+        {cluster?.map((item, index) => {
           if (index === 0) {
             return (
               <React.Fragment key={item + index}>

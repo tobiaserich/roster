@@ -12,10 +12,10 @@ const Container = styled("div")`
   z-index: 2000;
 `;
 
-const Header = ({ cluster }) => {
+const Header = ({ cluster, changeCluster }) => {
   return (
     <Container>
-      <Dropdown cluster={cluster} />
+      <Dropdown cluster={cluster} changeCluster={changeCluster} />
     </Container>
   );
 };
