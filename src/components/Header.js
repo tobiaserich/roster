@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import SwitchMenu from "./SwitchMenu";
 import Dropdown from "./Dropdown";
 
 const Container = styled("div")`
@@ -16,6 +17,7 @@ const Header = ({ cluster }) => {
   return (
     <Container>
       <Dropdown cluster={cluster} />
+      <SwitchMenu />
     </Container>
   );
 };
