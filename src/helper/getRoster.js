@@ -5,7 +5,6 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = worker;
 const getRoster = async () => {
   const initializePdf = async () => {
     const pdf = await pdfjsLib.getDocument("Juli_25.pdf").promise;
-
     let allPages = [];
     for (let i = 1; i <= pdf.numPages; i++) {
       const pages = await pdf.getPage(i);
@@ -34,7 +33,7 @@ const getRoster = async () => {
   const sortPeople = () => {
     //save all ppl and relevant data
     const sortedPeople = [];
-    let currentCluster;
+    const clusters = [];
     let newPerson = true;
     let secondLine = false;
     //clean arr from empty strings
@@ -50,7 +49,7 @@ const getRoster = async () => {
           firstLine: [],
           secondLine: [],
           title: "",
-          cluster: currentCluster,
+          cluster: clusters[clusters.length - 1],
         });
         newPerson = false;
         secondLine = false;
@@ -91,11 +90,11 @@ const getRoster = async () => {
         isNaN(parseInt(item.str)) &&
         !item.str.match(/Mo|Di|Mi|Do|Fr|Sa|So/g)
       ) {
-        currentCluster = item.str;
+        clusters.push(item.str);
         return;
       }
     });
-    return sortedPeople;
+    return { cluster: clusters, employee: sortedPeople };
   };
   const result = sortPeople();
   return result;
