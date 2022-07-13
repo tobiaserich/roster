@@ -11,6 +11,7 @@ const Main = () => {
     setCurrentCluster(clusterName);
   };
 
+
   React.useEffect(() => {
     const allPages = async () => {
       const result = await getRoster();
@@ -20,12 +21,11 @@ const Main = () => {
     };
     allPages();
   }, []);
-
+  
   const employeesInCurrentCluster = singlePage?.employee.find(
     (employee) => employee.cluster === currentCluster
   );
 
-  console.log(employeesInCurrentCluster);
   return (
     <>
       <Header

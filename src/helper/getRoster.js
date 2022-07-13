@@ -5,6 +5,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = worker;
 const getRoster = async () => {
   const initializePdf = async () => {
     const pdf = await pdfjsLib.getDocument("Juli_25.pdf").promise;
+
     let allPages = [];
     for (let i = 1; i <= pdf.numPages; i++) {
       const pages = await pdf.getPage(i);
@@ -90,6 +91,7 @@ const getRoster = async () => {
         isNaN(parseInt(item.str)) &&
         !item.str.match(/Mo|Di|Mi|Do|Fr|Sa|So/g)
       ) {
+
         clusters.push(item.str);
         return;
       }

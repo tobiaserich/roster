@@ -1,3 +1,4 @@
+
 import GlobalStyles from "./GlobalStyles";
 import Main from "./pages/Main";
 
