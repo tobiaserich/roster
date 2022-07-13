@@ -8,7 +8,6 @@ const Main = () => {
   React.useEffect(() => {
     const allPages = async () => {
       const result = await getRoster();
-      console.log(result);
       setSinglePage(result);
     };
     allPages();

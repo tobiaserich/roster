@@ -47,11 +47,15 @@ const Item = styled("div")`
 
 const Dropdown = ({ cluster }) => {
   const [status, setStatus] = React.useState(false);
-  const [currentCluster, setCurrentCluster] = React.useState(cluster[0]);
+  const [currentCluster, setCurrentCluster] = React.useState();
   const handleStatus = (e) => {
     e.currentTarget.scroll(0, 0);
     setStatus(!status);
   };
+
+  React.useEffect(() => {
+    setCurrentCluster(cluster?.[0]);
+  }, [cluster]);
 
   const handleClusterChange = (e) => {
     setCurrentCluster(e.currentTarget.innerText);
@@ -59,18 +63,22 @@ const Dropdown = ({ cluster }) => {
   return (
     <>
       <DropdownContainer status={status} onClick={handleStatus}>
-        {[currentCluster, ...cluster]?.map((item, index) => {
+        {[currentCluster, ...(cluster ?? "")]?.map((item, index) => {
           if (index === 0) {
             return (
-              <>
+              <React.Fragment key={item + index}>
                 <Item>
                   {item}
                   <Image src={ArrowDown} />
                 </Item>
-              </>
+              </React.Fragment>
             );
           } else {
-            return <Item onClick={handleClusterChange}>{item}</Item>;
+            return (
+              <Item key={item + index} onClick={handleClusterChange}>
+                {item}
+              </Item>
+            );
           }
         })}
       </DropdownContainer>
