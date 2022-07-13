@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "../components/Header";
 import getRoster from "../helper/getRoster";
 
 const Main = () => {
@@ -13,7 +14,11 @@ const Main = () => {
     allPages();
   }, []);
 
-  return <>{singlePage?.map((item) => item)}</>;
+  return (
+    <>
+      <Header cluster={singlePage?.cluster}></Header>
+    </>
+  );
 };
 
 export default Main;
