@@ -12,19 +12,32 @@ const DropdownContainer = styled("div")`
   margin: 0 3px;
   margin-top: 2px;
   position: absolute;
+  z-index: 10;
+  min-height: 40px;
   ${({ status }) =>
     status === false
       ? { maxHeight: "40px" }
-      : "overflow: scroll;scrollbar-width:thin;max-height:240px;"};
-  border: 1px solid black;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
-  background-color: #d9d9d9;
+      : {
+          overflowY: "scroll",
+          scrollbarWidth: "thin",
+          maxHeight: "240px",
+          marginLeft: "11px",
+        }};
+
+  background: #ffe6cc;
+  box-shadow: 0.5px 0px 0.3px rgba(255, 255, 255, 0.78),
+    -0.5px 0px 0.5px rgba(0, 0, 0, 0.25), inset 0px 1px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
   > {
     :after {
       display: inline-block;
       content: "";
-      width: 20px;
+      width: 30px;
+    }
+    :before {
+      display: inline-block;
+      content: "";
+      width: 10px;
     }
   }
 `;
@@ -33,6 +46,7 @@ const Image = styled("img")`
   position: absolute;
   right: 5px;
   bottom: 47%;
+  padding-right: 10px;
 `;
 
 const Item = styled("div")`
