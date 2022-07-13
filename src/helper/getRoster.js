@@ -34,7 +34,7 @@ const getRoster = async () => {
   const sortPeople = () => {
     //save all ppl and relevant data
     const sortedPeople = [];
-    let currentCluster;
+    const clusters = [];
     let newPerson = true;
     let secondLine = false;
     //clean arr from empty strings
@@ -50,7 +50,7 @@ const getRoster = async () => {
           firstLine: [],
           secondLine: [],
           title: "",
-          cluster: currentCluster,
+          cluster: clusters[clusters.length - 1],
         });
         newPerson = false;
         secondLine = false;
@@ -91,11 +91,12 @@ const getRoster = async () => {
         isNaN(parseInt(item.str)) &&
         !item.str.match(/Mo|Di|Mi|Do|Fr|Sa|So/g)
       ) {
-        currentCluster = item.str;
+
+        clusters.push(item.str);
         return;
       }
     });
-    return sortedPeople;
+    return { cluster: clusters, employee: sortedPeople };
   };
   const result = sortPeople();
   return result;
