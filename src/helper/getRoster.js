@@ -33,6 +33,8 @@ const getRoster = async () => {
 
   const sortPeople = () => {
     //save all ppl and relevant data
+    let month;
+    let year;
     const sortedPeople = [];
     const clusters = [];
     let newPerson = true;
@@ -42,9 +44,15 @@ const getRoster = async () => {
       (item) => item.str !== "" && item.str !== " "
     );
 
-    const result = cleanArr?.map((item, index) => {
-      //check if the current entry is a person
+    cleanArr?.map((item, index) => {
+      if (item.str.includes("für den Monat")) {
+        const getMonthAndYear = item.str.split("für den Monat")?.[1].split(" ");
+        month = getMonthAndYear[1];
+        year = getMonthAndYear[2];
+        return;
+      }
       if (item.str.match(/([\p{L}\p{N}_]+,?\s?[\p{L}\p{N}_]+,)/gu)) {
+        //check if the current entry is a person
         sortedPeople.push({
           name: item.str,
           firstLine: [],
@@ -95,8 +103,10 @@ const getRoster = async () => {
         clusters.push(item.str);
         return;
       }
+      return;
     });
-    return { cluster: clusters, employee: sortedPeople };
+
+    return { cluster: clusters, employee: sortedPeople, month, year };
   };
   const result = sortPeople();
   return result;
