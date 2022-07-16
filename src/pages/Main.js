@@ -1,16 +1,17 @@
 import React from "react";
 import Header from "../components/Header";
 import getRoster from "../helper/getRoster";
+import Rosters from "../components/Rosters";
 
 const Main = () => {
   const [singlePage, setSinglePage] = React.useState();
+
   const [currentCluster, setCurrentCluster] = React.useState("");
   const [allCluster, setAllCluster] = React.useState("");
 
   const changeCurrentCluster = (clusterName) => {
     setCurrentCluster(clusterName);
   };
-
 
   React.useEffect(() => {
     const allPages = async () => {
@@ -21,17 +22,25 @@ const Main = () => {
     };
     allPages();
   }, []);
-  
-  const employeesInCurrentCluster = singlePage?.employee.find(
-    (employee) => employee.cluster === currentCluster
-  );
 
+  const employeesInCurrentCluster = () =>
+    singlePage?.employee.filter(
+      (employee) => employee.cluster === currentCluster
+    );
   return (
     <>
       <Header
         cluster={[currentCluster, ...allCluster]}
         changeCluster={changeCurrentCluster}
       ></Header>
+
+      <Rosters
+        employeeList={{
+          employees: employeesInCurrentCluster(),
+          year: singlePage?.year,
+          month: singlePage?.month,
+        }}
+      />
     </>
   );
 };
