@@ -44,10 +44,10 @@ const FirstName = styled("div")`
 //   font-size: 15px;
 // `;
 
-const RosterTableEmployeeInfo = ({ employeeName }) => {
+const RosterTableEmployeeInfo = ({ employeeName, onClick }) => {
   const name = employeeName.split(",");
   return (
-    <GridContainer>
+    <GridContainer onClick={onClick}>
       <SurName>{name?.[0]?.trim()}</SurName>
       <FirstName>{name?.[1]?.trim()}</FirstName>
     </GridContainer>

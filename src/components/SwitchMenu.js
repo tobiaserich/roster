@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import listImage from "../assets/img/list.svg";
 import calendarImage from "../assets/img/calendar.svg";
+import statisticImage from "../assets/img/statistic.svg";
 
 const SwitchContainer = styled("div")`
   display: flex;
@@ -84,9 +85,12 @@ const RightSwitch = styled("div")`
       : ""};
 `;
 
-const SwitchMenu = () => {
+const SwitchMenu = ({ forPage }) => {
   const [pressedButton, setPressedButton] = React.useState(null);
   const [initial, setInitial] = React.useState(true);
+
+  const leftImage = calendarImage;
+  const rightImage = forPage === "employeeDetail" ? statisticImage : listImage;
 
   React.useEffect(() => {
     const timeOut: any = () => setTimeout(() => setInitial(false), 1000);
@@ -113,7 +117,7 @@ const SwitchMenu = () => {
           shadow={shadow}
           initial={initial}
         >
-          <img src={calendarImage} alt="calendar" />
+          <img src={leftImage} alt="calendar" />
         </LeftSwitch>
         <RightSwitch
           onClick={() => {
@@ -123,7 +127,7 @@ const SwitchMenu = () => {
           shadow={shadow}
           initial={initial}
         >
-          <img src={listImage} alt="list" />
+          <img src={rightImage} alt="list" />
         </RightSwitch>
       </SwitchContainer>
     </>
