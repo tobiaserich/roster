@@ -14,7 +14,6 @@ function GlobalStyles() {
           margin: 0;
           font-family: "roboto", "sans-serif";
           background-color:black;
-          overflow:hidden;
           height:100vh;
         }
         #root {
@@ -22,7 +21,8 @@ function GlobalStyles() {
           margin:auto;
           height:100%;
           max-width: 500px;
-background-color:green;
+          background-color:#FFEBD6;
+          overflow-x:scroll;
         }
       }
       `}

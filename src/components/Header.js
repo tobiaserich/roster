@@ -9,14 +9,17 @@ const Container = styled("div")`
   width: 100%;
   justify-content: center;
   background-color: #ffebd6;
-  position: relative;
+  position: sticky;
+  top: 0;
+  left: 0;
   z-index: 2000;
 `;
 
 const Header = ({ cluster, changeCluster }) => {
   return (
     <Container>
-      <Dropdown cluster={cluster} />
+
+      <Dropdown cluster={cluster} changeCluster={changeCluster} />
       <SwitchMenu />
     </Container>
   );
