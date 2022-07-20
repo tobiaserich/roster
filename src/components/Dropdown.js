@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
+import { PageContext } from "../App";
 import ArrowDown from "../assets/img/ArrowDown.svg";
 
 const DropdownContainer = styled("div")`
@@ -62,6 +63,7 @@ const Item = styled("div")`
 const Dropdown = ({ cluster, changeCluster }) => {
   const [status, setStatus] = React.useState(false);
   const [currentCluster, setCurrentCluster] = React.useState();
+  const context = React.useContext(PageContext);
   const handleStatus = (e) => {
     e.currentTarget.scroll(0, 0);
     setStatus(!status);
@@ -72,7 +74,7 @@ const Dropdown = ({ cluster, changeCluster }) => {
   }, [cluster]);
 
   const handleClusterChange = (e) => {
-    changeCluster(e.currentTarget.innerText);
+    context.setCurrentCluster(e.currentTarget.innerText);
   };
   return (
     <>
