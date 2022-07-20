@@ -4,7 +4,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = worker;
 
 const getRoster = async () => {
   const initializePdf = async () => {
-    const pdf = await pdfjsLib.getDocument("Juli_22.pdf").promise;
+    const pdf = await pdfjsLib.getDocument("Juli_25.pdf").promise;
 
     let allPages = [];
     for (let i = 1; i <= pdf.numPages; i++) {
@@ -104,7 +104,7 @@ const getRoster = async () => {
       }
       return;
     });
-
+    console.log(month);
     return { cluster: clusters, employee: sortedPeople, month, year };
   };
   const result = sortPeople();
