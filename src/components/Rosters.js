@@ -3,6 +3,7 @@ import React from "react";
 import RosterTableContainer from "./RosterTableContainer";
 import RosterTableEmployeeInfo from "./RosterTableEmployeeInfo";
 import RosterTableColumn from "./RosterTableColumn";
+import { PageContext } from "../App";
 
 const Container = styled("main")`
   display: flex;
@@ -13,6 +14,8 @@ const Container = styled("main")`
   width: fit-content;
 `;
 const Rosters = ({ employeeList }) => {
+  const context = React.useContext(PageContext);
+
   const months = {
     Januar: "January",
     Februar: "February",
@@ -32,7 +35,16 @@ const Rosters = ({ employeeList }) => {
     <Container>
       {employeeList?.employees?.map((employee) => (
         <RosterTableContainer>
-          <RosterTableEmployeeInfo employeeName={employee.name} />
+          <RosterTableEmployeeInfo
+            employeeName={employee.name}
+            onClick={() =>
+              context.openEmployeeDetailPage({
+                month: months[employeeList.month],
+                year: employeeList.year,
+                ...employee,
+              })
+            }
+          />
           {employee.firstLine.map((entry, index) => {
             const dates = new Date(
               ` ${months[employeeList.month]} ${index + 1},${employeeList.year}`
