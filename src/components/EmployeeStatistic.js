@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { PageContext } from "../App";
+import PieChart from "./PieChart";
 
 const Container = styled("div")`
   margin: auto;
@@ -50,8 +51,10 @@ const EmployeeStatistic = () => {
   const uniqueValues = [
     ...new Set(context.employeeData.firstLine.map((entry) => entry.str)),
   ];
-  const percentageLength =
-    window.innerWidth / (context.employeeData.firstLine.length - 1);
+  const percentageLength = Math.floor(
+    (window.innerWidth > 500 ? 500 : window.innerWidth) /
+      (context.employeeData.firstLine.length - 1)
+  );
 
   const calcBars = () => {
     context.employeeData.firstLine.map((entry) => {
@@ -85,6 +88,7 @@ const EmployeeStatistic = () => {
           </BarContainer>
         );
       })}
+      <PieChart />
     </Container>
   );
 };
