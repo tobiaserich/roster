@@ -34,7 +34,6 @@ const Bar = styled("div")`
   animation: grow 1s ease both;
   transform-origin: left;
   padding-left: 10px;
-
   @keyframes grow {
     0% {
       transform: scaleX(0);
@@ -43,6 +42,14 @@ const Bar = styled("div")`
       transform: scaleX(1);
     }
   }
+`;
+
+const PieTitle = styled("div")`
+  margin-top: 30px;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: bolder;
 `;
 
 const EmployeeStatistic = () => {
@@ -88,6 +95,7 @@ const EmployeeStatistic = () => {
           </BarContainer>
         );
       })}
+      <PieTitle>Employment Workload</PieTitle>
       <PieChart />
     </Container>
   );
