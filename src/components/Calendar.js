@@ -54,7 +54,6 @@ const Shift = styled("div")`
 `;
 const Calendar = () => {
   const context = React.useContext(PageContext);
-  console.log(context.employeeData);
   const firstDayOfMonth = () => {
     const value = new Date(
       `${context.employeeData.month} 1, ${context.employeeData.year}`

@@ -11,7 +11,8 @@ const Row = styled("div")`
   z-index: 100;
   background-color: ${({ bgColor }) => `#${bgColor}`};
   height: 60px;
-  min-width: 23px;
+  min-width: 25px;
+  max-width: 25px;
   border-radius: 50px;
   overflow: hidden;
   box-shadow: 0.5px 0px 0.3px rgba(255, 255, 255, 0.78),
