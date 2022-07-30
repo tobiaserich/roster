@@ -12,8 +12,12 @@ const Container = styled("main")`
   margin-bottom: 20px;
   margin-right: 30px;
   width: fit-content;
+  ${({ disableScrollX }) =>
+    disableScrollX
+      ? { overflow: "hidden", width: "inherit", scrollbar: "none" }
+      : ""}
 `;
-const Rosters = ({ employeeList }) => {
+const Rosters = ({ employeeList, disableScrollX }) => {
   const context = React.useContext(PageContext);
 
   const months = {
@@ -32,7 +36,7 @@ const Rosters = ({ employeeList }) => {
   };
 
   return (
-    <Container>
+    <Container disableScrollX={disableScrollX}>
       {employeeList?.employees?.map((employee) => (
         <RosterTableContainer>
           <RosterTableEmployeeInfo
