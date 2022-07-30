@@ -5,7 +5,6 @@ import { PageContext } from "../App";
 import backImage from "../assets/img/backButton.svg";
 import settingsImage from "../assets/img/settings.svg";
 import Button from "./Button";
-import PopUpMenu from "./PopUpMenu";
 
 const Container = styled("div")`
   display: flex;
