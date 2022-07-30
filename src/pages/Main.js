@@ -2,46 +2,48 @@ import React from "react";
 import Header from "../components/Header";
 import getRoster from "../helper/getRoster";
 import Rosters from "../components/Rosters";
+import { PageContext } from "../App";
 
 const Main = () => {
-  const [singlePage, setSinglePage] = React.useState();
-
-  const [currentCluster, setCurrentCluster] = React.useState("");
-  const [allCluster, setAllCluster] = React.useState("");
-
+  const context = React.useContext(PageContext);
   const changeCurrentCluster = (clusterName) => {
-    setCurrentCluster(clusterName);
+    context.setCurrentCluster(clusterName);
   };
 
   React.useEffect(() => {
     const allPages = async () => {
       const result = await getRoster();
-      setSinglePage(result);
-      setAllCluster(result.cluster);
-      setCurrentCluster(result.cluster[0]);
+      context.setAllData(result);
+      if (context.currentCluster === "") {
+        context.setCurrentCluster(result.cluster[0]);
+      }
     };
-    allPages();
+
+    context.allData || allPages();
   }, []);
 
   const employeesInCurrentCluster = () =>
-    singlePage?.employee.filter(
-      (employee) => employee.cluster === currentCluster
+    context.allData?.employee.filter(
+      (employee) => employee.cluster === context.currentCluster
     );
-  return (
+
+  return context.allData ? (
     <>
       <Header
-        cluster={[currentCluster, ...allCluster]}
+        cluster={[context.currentCluster, ...context.allData.cluster]}
         changeCluster={changeCurrentCluster}
       ></Header>
 
       <Rosters
         employeeList={{
           employees: employeesInCurrentCluster(),
-          year: singlePage?.year,
-          month: singlePage?.month,
+          year: context.allData.year,
+          month: context.allData.month,
         }}
       />
     </>
+  ) : (
+    <></>
   );
 };
 
