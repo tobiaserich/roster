@@ -85,7 +85,7 @@ const RightSwitch = styled("div")`
       : ""};
 `;
 
-const SwitchMenu = ({ forPage }) => {
+const SwitchMenu = ({ forPage, changeMenu = () => {} }) => {
   const [pressedButton, setPressedButton] = React.useState(null);
   const [initial, setInitial] = React.useState(true);
 
@@ -103,6 +103,7 @@ const SwitchMenu = ({ forPage }) => {
 
   const handleClick = (direction) => {
     setPressedButton(direction);
+    changeMenu(direction);
   };
   const shadow = `0.5px 0px 0.3px rgba(255, 255, 255, 0.78),
       -0.5px 0px 0.5px rgba(0, 0, 0, 0.25), inset 0px 1px 2px rgba(0, 0, 0, 0.25)`;

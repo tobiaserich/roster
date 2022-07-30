@@ -50,12 +50,7 @@ const Rosters = ({ employeeList }) => {
               ` ${months[employeeList.month]} ${index + 1},${employeeList.year}`
             );
             const weekday = dates.getDay();
-            const color =
-              weekday === 0 || weekday === 6
-                ? "FFCC99"
-                : weekday === 2 || weekday === 4
-                ? "FFDEBD"
-                : "FFEBD6";
+            const color = weekday === 0 || weekday === 6 ? "FFCC99" : "FFEBD6";
 
             const findSecondLineItem = employee.secondLine.find(
               (anotherEntry) =>
