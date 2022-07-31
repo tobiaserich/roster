@@ -1,10 +1,11 @@
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf";
 import * as worker from "pdfjs-dist/build/pdf.worker.entry";
+import { db } from "./db";
 pdfjsLib.GlobalWorkerOptions.workerSrc = worker;
 
-const getRoster = async () => {
+const getRoster = async (file) => {
   const initializePdf = async () => {
-    const pdf = await pdfjsLib.getDocument("Juli_25.pdf").promise;
+    const pdf = await pdfjsLib.getDocument(file).promise;
 
     let allPages = [];
     for (let i = 1; i <= pdf.numPages; i++) {
@@ -31,7 +32,7 @@ const getRoster = async () => {
   };
   const pages = await initializePdf();
 
-  const sortPeople = () => {
+  const sortPeople = async () => {
     //save all ppl and relevant data
     let month;
     let year;
@@ -104,7 +105,6 @@ const getRoster = async () => {
       }
       return;
     });
-    console.log(month);
     return { cluster: clusters, employee: sortedPeople, month, year };
   };
   const result = sortPeople();
