@@ -5,12 +5,26 @@ import Rosters from "../components/Rosters";
 import { PageContext } from "../App";
 import PopUpMenu from "../components/PopUpMenu";
 import { db } from "../helper/db";
-import { useLiveQuery } from "dexie-react-hooks";
+import ChooseMonth from "../components/ChooseMonth";
 
 const Main = () => {
   const context = React.useContext(PageContext);
   const [settingsVisible, setSettingsVisible] = React.useState(false);
   const [data, setData] = React.useState("");
+  const months = [
+    "Januar",
+    "Februar",
+    "März",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Dezember",
+  ];
   const changeCurrentCluster = (clusterName) => {
     context.setCurrentCluster(clusterName);
   };
@@ -31,19 +45,35 @@ const Main = () => {
   React.useEffect(() => {
     const allPages = async () => {
       const indexTable = await db.files.toArray();
-      const allFiles = await db.data.toArray();
-      if (data === "") {
+      indexTable.sort((a, b) =>
+        months.indexOf(a.month) > months.indexOf(b.month) ? +1 : -1
+      );
+      const allFiles = await db.data
+        .where({
+          month: indexTable.at(-1).month,
+        })
+        .toArray();
+      if (data === "" && context.allData === "") {
+        context.setAllData(allFiles.at(-1).data);
+        if (context.currentCluster === "") {
+          context.setCurrentCluster(allFiles.at(-1).data.cluster[0]);
+        }
+
+        setData("indexedDBused");
         return;
       }
+      if (data === "indexedDBused") {
+        return;
+      }
+
       const result = await getRoster(data);
       context.setAllData(result);
-      console.log(indexTable);
-      console.log(allFiles);
       const searchInIndex = indexTable.find(
         (entry) => entry.month === result.month && entry.year === result.year
       );
       if (searchInIndex === undefined) {
-        db.files.add({ month: result.month, year: result.year });
+        await db.files.add({ month: result.month, year: result.year });
+        console.log(result);
         db.data.add({ month: result.month, year: result.year, data: result });
       }
 
@@ -78,6 +108,8 @@ const Main = () => {
         changeCluster={changeCurrentCluster}
         openSettings={(e) => changeSettingsVisibility(e, !settingsVisible)}
       ></Header>
+
+      <ChooseMonth />
 
       <Rosters
         employeeList={{

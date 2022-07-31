@@ -8,7 +8,6 @@ import { PageContext } from "../App";
 const Container = styled("main")`
   display: flex;
   flex-direction: column;
-  margin-top: 80px;
   margin-bottom: 20px;
   margin-right: 30px;
   width: fit-content;
