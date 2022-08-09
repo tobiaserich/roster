@@ -67,7 +67,6 @@ const ChooseMonth = () => {
   const changeDatasetInUse = async (dir) => {
     if (dir === "-") {
       const nextRoster = dbIndex[getPosInDb() - 1];
-      console.log(nextRoster);
       const dataset = await db.data
         .where({ month: nextRoster.month, year: nextRoster.year })
         .toArray();
@@ -75,7 +74,6 @@ const ChooseMonth = () => {
     }
     if (dir === "+") {
       const nextRoster = dbIndex[getPosInDb() + 1];
-      console.log(nextRoster);
       const dataset = await db.data
         .where({ month: nextRoster.month, year: nextRoster.year })
         .toArray();

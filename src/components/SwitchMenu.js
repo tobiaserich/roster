@@ -30,12 +30,14 @@ const LeftSwitch = styled("div")`
   box-shadow: ${({ shadow, pressedButton }) =>
     pressedButton === "left" ? shadow : "none"};
 
-  animation: ${({ pressedButton, initial }) =>
-    pressedButton === "left"
-      ? "in 0.2s cubic-bezier(.5,.5,0,1.25) both"
-      : !initial
-      ? "out 0.2s cubic-bezier(.5,.5,0,1.25) 0.1s both"
-      : ""};
+  animation: ${({ pressedButton, initial }) => {
+    if (pressedButton === "left") {
+      return "in 0.2s cubic-bezier(.5,.5,0,1.25) both";
+    }
+    if (pressedButton === "right" && !initial) {
+      return "out 0.2s cubic-bezier(.5,.5,0,1.25) 0.1s both";
+    }
+  }};
 
   @keyframes in {
     0% {
@@ -77,16 +79,23 @@ const RightSwitch = styled("div")`
   box-shadow: ${({ shadow, pressedButton }) =>
     pressedButton === "right" ? shadow : ""};
 
-  animation: ${({ pressedButton, initial }) =>
-    pressedButton === "right"
-      ? "in 0.2s cubic-bezier(.5,.5,0,1.25) both"
-      : !initial
-      ? "out 0.2s cubic-bezier(.5,.5,0,1.25) 0.1s both"
-      : ""};
+  animation: ${({ pressedButton, initial }) => {
+    if (pressedButton === "right") {
+      return "in 0.2s cubic-bezier(.5,.5,0,1.25) both";
+    }
+    if (pressedButton === "left" && !initial) {
+      return "out 0.2s cubic-bezier(.5,.5,0,1.25) 0.1s both";
+    }
+  }};
+`;
+
+const Image = styled("img")`
+  height: 40px;
+  width: 40px;
 `;
 
 const SwitchMenu = ({ forPage, changeMenu = () => {} }) => {
-  const [pressedButton, setPressedButton] = React.useState(null);
+  const [pressedButton, setPressedButton] = React.useState("right");
   const [initial, setInitial] = React.useState(true);
 
   const leftImage = calendarImage;
@@ -118,7 +127,7 @@ const SwitchMenu = ({ forPage, changeMenu = () => {} }) => {
           shadow={shadow}
           initial={initial}
         >
-          <img src={leftImage} alt="calendar" />
+          <Image src={leftImage} alt="calendar" />
         </LeftSwitch>
         <RightSwitch
           onClick={() => {
@@ -128,7 +137,7 @@ const SwitchMenu = ({ forPage, changeMenu = () => {} }) => {
           shadow={shadow}
           initial={initial}
         >
-          <img src={rightImage} alt="list" />
+          <Image src={rightImage} alt="list" />
         </RightSwitch>
       </SwitchContainer>
     </>

@@ -77,8 +77,8 @@ const Calendar = () => {
         {context.employeeData.firstLine.map((item, index) => {
           return (
             <CalendarDay key={item.str + index}>
-              <DateBox>{index + 1}</DateBox>
-              <Shift>{item.str}</Shift>
+              <DateBox key={item.str + index + "box"}>{index + 1}</DateBox>
+              <Shift key={item.str + index + "shift"}>{item.str}</Shift>
             </CalendarDay>
           );
         })}

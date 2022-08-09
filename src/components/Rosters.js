@@ -37,8 +37,9 @@ const Rosters = ({ employeeList, disableScrollX }) => {
   return (
     <Container disableScrollX={disableScrollX}>
       {employeeList?.employees?.map((employee) => (
-        <RosterTableContainer>
+        <RosterTableContainer key={employee.name + "1"}>
           <RosterTableEmployeeInfo
+            key={employee.name + "2"}
             employeeName={employee.name}
             onClick={() =>
               context.openEmployeeDetailPage({
@@ -63,6 +64,7 @@ const Rosters = ({ employeeList, disableScrollX }) => {
             );
             return (
               <RosterTableColumn
+                key={employee.name + entry.str + index}
                 color={color}
                 value={{
                   date: index + 1,

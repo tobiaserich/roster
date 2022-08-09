@@ -4,13 +4,14 @@ import { PageContext } from "../App";
 import ArrowDown from "../assets/img/ArrowDown.svg";
 
 const DropdownContainer = styled("div")`
+  max-width: 80%;
   color: black;
   display: inline-flex;
   font-family: "Arima Madurai";
   font-size: 30px;
   flex-direction: column;
   overflow: hidden;
-  margin: 0 3px;
+  margin: 0 3px 0 10px;
   margin-top: 2px;
   position: absolute;
   z-index: 10;
