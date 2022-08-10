@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../components/Header";
-// import getRoster from "../helper/getRoster";
 import Rosters from "../components/Rosters";
 import { PageContext } from "../App";
 import PopUpMenu from "../components/PopUpMenu";

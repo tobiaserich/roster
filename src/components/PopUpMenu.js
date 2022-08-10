@@ -23,6 +23,16 @@ const PopUp = styled("div")`
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
 `;
 
+const Title = styled("h1")`
+  margin: auto;
+  text-align: center;
+  margin-bottom: 10px;
+`;
+
+const Upload = styled("input")`
+  margin: 20px;
+`;
+
 const PopUpMenu = ({ closeSettings, setFile }) => {
   const uploadData = (e) => {
     const reader = new FileReader();
@@ -35,7 +45,8 @@ const PopUpMenu = ({ closeSettings, setFile }) => {
   return (
     <Container onClick={closeSettings}>
       <PopUp>
-        <input
+        <Title> Upload File</Title>
+        <Upload
           type="file"
           onChange={(e) => {
             uploadData(e);
