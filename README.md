@@ -1,6 +1,61 @@
-# Getting Started with Create React App
+# Duty Roster </br>Keep Track of Your Work Schedule.
+
+<img src="https://i.gyazo.com/5027bd0f7893ab8e6cf230427c951e98.png" alt="drawing"     style="display: block; 
+           margin-left: auto;
+           margin-right: auto;
+           width: 200px;"/>
+
+## Why
+
+Our duty roster is confusing and does not allow a daily listing of the existing staff.
+
+To change this I am developing the duty roster.  
+The data that I extract from the PDF files can also be used to show the monthly working hours and the balance of the different shifts.  
+There is still enormous development potential here in the future.
+
+---
+
+## Current Features
+
+- Upload new rosters
+- Duty roster display in the classic table
+- Personal rosters in calendar style
+- Basic analysis of the roster
+
+---
+
+## How to use
+
+- Upload a roster (example template is in the public folder) in the Settings menu  
+  <br/>
+  <img src="https://i.gyazo.com/f373b28da8eec494da0bb6748767b206.png" alt="drawing"     style="display: block; margin-left: auto; margin-right: auto; width: 200px;"/>
+  <br/>
+
+- Selection of the department in the dropdown menu  
+  <br/>
+  <img src="https://i.gyazo.com/fdcf06ba5646865f11ba9cc33994b15d.png" alt="drawing"     style="display: block; margin-left: auto; margin-right: auto; width: 200px;"/>
+  <br/>
+
+- Clicking on the person takes you to the person-related duty roster  
+  <br/>
+  <img src="https://i.gyazo.com/d24538f03f0b39e88d81c04988f0108f.png" alt="drawing"     style="display: block; margin-left: auto; margin-right: auto; width: 200px;"/>
+  <br/>
+
+- Selection between statistics and calendar display of the roster  
+  <br/>
+  <img src="https://i.gyazo.com/40cd7b70ba12ce9a4371ea0a909295e3.png" alt="drawing"     style="display: block; margin-left: auto; margin-right: auto; width: 200px;"/>
+  <br/>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+---
+
+## Privacy
+
+All data is stored locally only.  
+The dev has no access to any data.
+
+\_\_
 
 ## Available Scripts
 
