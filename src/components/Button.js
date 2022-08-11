@@ -11,6 +11,9 @@ const Button = styled("div")`
     if (pos === "right") {
       return { right: "5px" };
     }
+    if (pos === "right-centered") {
+      return { right: "5px", top: "0", bottom: "0", margin: "auto" };
+    }
   }};
   background-image: ${({ image }) => `url(${image}`});
   background-repeat: space;

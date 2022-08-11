@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
-import getRoster from "../helper/getRoster";
+// import getRoster from "../helper/getRoster";
 import Rosters from "../components/Rosters";
 import { PageContext } from "../App";
 import PopUpMenu from "../components/PopUpMenu";
@@ -30,7 +30,7 @@ const Main = () => {
   };
 
   const changeSettingsVisibility = (e, input) => {
-    if (input === true) {
+    if (input) {
       e.currentTarget.parentElement.parentElement.scroll(0, 0);
       setSettingsVisible(input);
     }
@@ -48,48 +48,47 @@ const Main = () => {
       indexTable.sort((a, b) =>
         months.indexOf(a.month) > months.indexOf(b.month) ? +1 : -1
       );
-      const allFiles = await db.data
-        .where({
-          month: indexTable.at(-1).month,
-        })
-        .toArray();
-      if (data === "" && context.allData === "") {
-        context.setAllData(allFiles.at(-1).data);
-        if (context.currentCluster === "") {
-          context.setCurrentCluster(allFiles.at(-1).data.cluster[0]);
+
+      if (indexTable.length > 0 && context.allData === "") {
+        const allFiles = await db.data
+          .where({ month: indexTable.at(-1).month })
+          .toArray();
+        if (data === "" && context.allData === "") {
+          context.setAllData(allFiles.at(-1).data);
+          if (context.currentCluster === "") {
+            context.setCurrentCluster(allFiles.at(-1).data.cluster[0]);
+          }
+          return;
+        }
+      }
+
+      if (context.allData === "" || settingsVisible) {
+        const getRoster = await import("../helper/getRoster");
+        console.log(getRoster);
+        const result = await getRoster.default(data);
+        context.setAllData(result);
+        const searchInIndex = indexTable.find(
+          (entry) => entry.month === result.month && entry.year === result.year
+        );
+        if (searchInIndex === undefined) {
+          await db.files.add({ month: result.month, year: result.year });
+          db.data.add({ month: result.month, year: result.year, data: result });
         }
 
-        setData("indexedDBused");
-        return;
-      }
-      if (data === "indexedDBused") {
-        return;
-      }
-
-      const result = await getRoster(data);
-      context.setAllData(result);
-      const searchInIndex = indexTable.find(
-        (entry) => entry.month === result.month && entry.year === result.year
-      );
-      if (searchInIndex === undefined) {
-        await db.files.add({ month: result.month, year: result.year });
-        console.log(result);
-        db.data.add({ month: result.month, year: result.year, data: result });
-      }
-
-      if (context.currentCluster === "") {
-        context.setCurrentCluster(result.cluster[0]);
+        if (context.currentCluster === "") {
+          context.setCurrentCluster(result.cluster[0]);
+        }
       }
     };
 
     allPages();
   }, [data]);
 
-  const employeesInCurrentCluster = () =>
-    context.allData?.employee?.filter(
+  const employeesInCurrentCluster = () => {
+    return context?.allData?.employee?.filter(
       (employee) => employee.cluster === context.currentCluster
     );
-
+  };
   return (
     <>
       {settingsVisible ? (
@@ -106,7 +105,7 @@ const Main = () => {
           ...(context?.allData?.cluster ?? ""),
         ]}
         changeCluster={changeCurrentCluster}
-        openSettings={(e) => changeSettingsVisibility(e, !settingsVisible)}
+        openSettings={(e) => changeSettingsVisibility(e, true)}
       ></Header>
 
       <ChooseMonth />

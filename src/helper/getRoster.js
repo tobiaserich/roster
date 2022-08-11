@@ -3,7 +3,7 @@ import * as worker from "pdfjs-dist/build/pdf.worker.entry";
 import { db } from "./db";
 pdfjsLib.GlobalWorkerOptions.workerSrc = worker;
 
-const getRoster = async (file) => {
+export default async (file) => {
   const initializePdf = async () => {
     const pdf = await pdfjsLib.getDocument(file).promise;
 
@@ -111,4 +111,4 @@ const getRoster = async (file) => {
   return result;
 };
 
-export default getRoster;
+// export default getRoster;

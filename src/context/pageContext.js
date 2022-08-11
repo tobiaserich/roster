@@ -6,10 +6,9 @@ const PageProvider = (props) => {
   const [page, setPage] = React.useState("main");
   const [allData, setAllData] = React.useState("");
   const [employeeData, setEmployeeData] = React.useState("main");
-  const [currentCluster, setCurrentCluster] = React.useState("PACU 25 UHZ");
+  const [currentCluster, setCurrentCluster] = React.useState("");
 
   const openEmployeeDetailPage = (employee) => {
-    console.log(employee);
     setEmployeeData(employee);
     setPage("employeeDetail");
   };

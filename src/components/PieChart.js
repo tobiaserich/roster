@@ -51,7 +51,6 @@ const PieChart = () => {
 
   const calcWorkingHours = () => {
     const data = context.employeeData.firstLine;
-    console.log(data);
     let hoursToWork = 0;
     let workedHours = 0;
     data.map((d, index) => {
@@ -71,8 +70,6 @@ const PieChart = () => {
       }
       hoursToWork = hoursToWork + 7.33;
     });
-    console.log(workedHours);
-    console.log(hoursToWork);
     return { workedHours, hoursToWork };
   };
 

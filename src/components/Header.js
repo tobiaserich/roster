@@ -9,7 +9,7 @@ const Container = styled("div")`
   display: flex;
   height: 50px;
   width: 100%;
-  justify-content: center;
+  justify-content: space-between;
   background-color: #ffebd6;
   position: sticky;
   top: 0;
@@ -22,7 +22,11 @@ const Header = ({ cluster, changeCluster, openSettings }) => {
     <Container>
       <Dropdown cluster={cluster} changeCluster={changeCluster} />
       <SwitchMenu />
-      <Button pos="right" onClick={openSettings} image={settingsImage} />
+      <Button
+        pos="right-centered"
+        onClick={openSettings}
+        image={settingsImage}
+      />
     </Container>
   );
 };

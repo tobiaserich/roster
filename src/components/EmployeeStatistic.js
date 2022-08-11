@@ -77,12 +77,12 @@ const EmployeeStatistic = () => {
   uniqueValues.sort((a, b) => (allSorted[a] > allSorted[b] ? -1 : 1));
   return (
     <Container>
-      {uniqueValues.map((value) => {
+      {uniqueValues.map((value, index) => {
         if (value === "x!" || value === "x") {
           return;
         }
         return (
-          <BarContainer>
+          <BarContainer key={value + index}>
             <Bar compWidth={percentageLength * allSorted[value]}>{value}</Bar>
             <PercentageDisplay>
               {Math.floor(
